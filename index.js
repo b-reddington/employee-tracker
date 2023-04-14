@@ -1,6 +1,11 @@
-
+// Used for creating prompts
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+
+// Exported Models
+const addNewDepartment = require('./models/addNewDepartment');
+const addNewRole = require('./models/addNewRole');
+const init = require('./server');
 
 function promptUser() {
     inquirer
@@ -16,49 +21,43 @@ function promptUser() {
         .then((answers) => {
             switch (answers.actions) {
                 case 'View All Employees':
-
-
+                // add query to view all employees
                     promptUser();
                     break;
-                case 'Update Employee Role':
-                    
 
+                case 'Update Employee Role':
                     promptUser();
                     break;
                 case 'View All Roles':
-                    
-
+                    // add query to view all roles
                     promptUser();
                     break;
+
                 case 'Add Role':
-                    
-
-                    promptUser();
+                    addNewRole();
                     break;
+
                 case 'View All Departments':
-                    
-
+                    // add query to view all departments
                     promptUser();
                     break;
+
                 case 'Add Department':
-                    
+                    addNewDepartment();
+                    break;
 
-                    promptUser();
-                    break;
                 case 'Quit':
-                    console.log(`Goodbye!`);
+                    console.log(`\x1b[33mGoodbye!\x1b[0m`);
                     break;
+
                 default:
                     console.log('You must pick an option.');
                     promptUser();
-
             }
         });
-        
 }
-
 // This console log acts as a header for when the user starts the application
-console.log(`\x1b[96m
+console.log(`\x1b[96m  
   ███████╗███╗   ███╗██████╗ ██╗      ██████╗ ██╗   ██╗███████╗███████╗
   ██╔════╝████╗ ████║██╔══██╗██║     ██╔═══██╗╚██╗ ██╔╝██╔════╝██╔════╝
   █████╗  ██╔████╔██║██████╔╝██║     ██║   ██║ ╚████╔╝ █████╗  █████╗  
@@ -66,12 +65,14 @@ console.log(`\x1b[96m
   ███████╗██║ ╚═╝ ██║██║     ███████╗╚██████╔╝   ██║   ███████╗███████╗
   ╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝
                                                                                
-  ████████╗██████╗  █████╗  ██████╗██╗  ██╗███████╗██████╗             
-  ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗            
-     ██║   ██████╔╝███████║██║     █████╔╝ █████╗  ██████╔╝            
-     ██║   ██╔══██╗██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗            
-     ██║   ██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║            
-     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \x1b[0m`);
+        ████████╗██████╗  █████╗  ██████╗██╗  ██╗███████╗██████╗             
+        ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗            
+           ██║   ██████╔╝███████║██║     █████╔╝ █████╗  ██████╔╝            
+           ██║   ██╔══██╗██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗            
+           ██║   ██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║            
+           ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝\x1b[0m`);
 
+// Start SQL Services
+init();
+// Activate prompt on app load
 promptUser();
-

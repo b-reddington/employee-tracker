@@ -19,7 +19,10 @@
   "homepage": "https://github.com/b-reddington/employee-tracker#readme",
   "dependencies": {
     "console.table": "^0.10.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "inquirer": "^8.2.4",
-    "mysql2": "^3.2.1"
+    "mysql2": "^3.2.1",
+    "sequelize": "^6.31.0"
   }
 }
