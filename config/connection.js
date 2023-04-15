@@ -1,11 +1,9 @@
 // Connect to the database
-const mysql = require('mysql2');
+const promptUser = require('../models/promptUser');
 require('dotenv').config();
 const Sequelize = require('sequelize');
 let sequelize;
-if (process.env.JAWSDB_URL) {
-    sequelize = new Sequelize(process.env.JAWSDB_URL);
-} else {
+
     sequelize = new Sequelize(
         process.env.DB_NAME,
         process.env.DB_USER,
@@ -16,5 +14,16 @@ if (process.env.JAWSDB_URL) {
             port: 3306
         }
     );
+async function init() {
+    (async () => {
+        try {
+            await sequelize.authenticate();
+            console.log('Connection has been established successfully.');
+            await promptUser();
+        }
+        catch (error) {
+            console.error('Unable to connect to the database:', error);
+        }
+    })();
 }
-module.exports = sequelize;
+module.exports = init;
