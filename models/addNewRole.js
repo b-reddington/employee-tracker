@@ -1,21 +1,15 @@
 const inquirer = require('inquirer');
-const promptUser = require('./promptUser');
-console.dir(promptUser);
-function addNewRole() {
-    inquirer
-        .prompt([
-            {
-                type: 'input',
-                name: 'addRole',
-                message: 'What role would you like to add?',
-            }
-        ])
-        .then((answer) => {
-            const promptUser = require('./promptUser');
-            // temporary log until DB logic is added
-            console.log(`${answer.addRole} role added`)
-            promptUser();
-        });
+
+async function addNewRole() {
+    const answer = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'addRole',
+            message: 'What role would you like to add?',
+        }
+    ]);
+
+    return `${answer.addRole} role added`;
 }
 
 module.exports = addNewRole;

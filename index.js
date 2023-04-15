@@ -1,4 +1,6 @@
-const init = require('./server');
+const sequelize = require('./config/connection');
+const promptUser = require('./models/promptUser');
+
 // This console log acts as a header for when the user starts the application
 console.log(`\x1b[96m  
   ███████╗███╗   ███╗██████╗ ██╗      ██████╗ ██╗   ██╗███████╗███████╗
@@ -17,5 +19,11 @@ console.log(`\x1b[96m
            
            \x1b[0m`);
 
-// Start SQL Services
+async function init() {
+  // Start SQL Services
+
+  // turn on connection to db and server
+  await promptUser();
+}
+
 init();

@@ -1,19 +1,15 @@
 const inquirer = require('inquirer');
-const promptUser = require('./promptUser');
-function addNewDepartment() {
-    inquirer
-        .prompt([
-            {
-                type: 'input',
-                name: 'addRole',
-                message: 'What department would you like to add?',
-            }
-        ])
-        .then((answer) => {
-            // temporary log until DB logic is added
-            console.log(`${answer.addRole} department added`)
-            promptUser();
-        });
+
+async function addNewDepartment() {
+    const answer = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'addRole',
+            message: 'What department would you like to add?',
+        }
+    ]);
+
+    return `${answer.addRole} department added`;
 }
 
 module.exports = addNewDepartment;
