@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-
+const promptUser = require('./promptUser');
+console.dir(promptUser);
 function addNewRole() {
     inquirer
         .prompt([
