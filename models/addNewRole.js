@@ -1,5 +1,5 @@
-const promptUser = require('./promptUser');
 const inquirer = require('inquirer');
+
 function addNewRole() {
     inquirer
         .prompt([
@@ -10,6 +10,7 @@ function addNewRole() {
             }
         ])
         .then((answer) => {
+            const promptUser = require('./promptUser');
             // temporary log until DB logic is added
             console.log(`${answer.addRole} role added`)
             promptUser();

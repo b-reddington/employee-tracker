@@ -13,10 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 function init() {
 
     app.listen(PORT, console.log(`Now listening on port: ${PORT}`));
-    
-    // Timeout set to avoid duplicate text from appearing before the sql server is established
+
+    // Timeout set to avoid duplicate text from appearing 
+    // before the sql server is established
     setTimeout(() => {
-    promptUser();
+        promptUser();
     }, 25);
 }
 module.exports = init;
