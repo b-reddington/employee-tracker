@@ -1,16 +1,38 @@
 const inquirer = require('inquirer');
+const db = require('../config/connection');
 
 async function addNewRole() {
-    const answer = await inquirer.prompt([
-        {
-            type: 'input',
-            name: 'addRole',
-            message: 'What role would you like to add?',
-        }
-    ]);
-
-    // temporary log until DB logic is added
-    return `${answer.addRole} added`;
+    try {
+        const result = await db.promise().query('SELECT id, name FROM department;');
+        const departments = result[0].map(department => {
+            return {
+                name: department.name,
+                value: department.id
+            };
+        });
+        const answer = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'addRole',
+                message: 'What role would you like to add?',
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary for this role?',
+            },
+            {
+                type: 'list',
+                name: 'departments',
+                message: 'What department does this role belong to?',
+                choices: departments
+            }
+        ]);
+        await db.promise().query(`INSERT INTO role (title, salary, department_id) VALUES ("${answer.addRole}", "${answer.salary}", "${answer.departments}");`);
+        console.log(`${answer.addRole} added`);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = addNewRole;

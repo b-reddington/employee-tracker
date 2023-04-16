@@ -1,10 +1,14 @@
 // Used for creating prompts
 const inquirer = require('inquirer');
-const cTable = require('console.table');
 
 // Exported Models
+const viewAllDepartments = require('./viewAllDepartments');
 const addNewDepartment = require('./addNewDepartment');
+const viewAllRoles = require('./viewAllRoles');
 const addNewRole = require('./addNewRole');
+const viewAllEmployees = require('./viewAllEmployees');
+const updateEmployee = require('./updateEmployee');
+const db = require('../config/connection');
 
 async function promptUser() {
     answers = await inquirer.prompt([
@@ -22,13 +26,15 @@ async function promptUser() {
     let result;
     switch (answers.actions) {
         case 'View All Employees':
-            // add query to view all employees
+            result = await viewAllEmployees();
             break;
 
         case 'Update Employee Role':
+            result = await updateEmployee();
             break;
+
         case 'View All Roles':
-            // add query to view all roles
+            result = await viewAllRoles();
             break;
 
         case 'Add Role':
@@ -36,7 +42,7 @@ async function promptUser() {
             break;
 
         case 'View All Departments':
-            // add query to view all departments
+            result = await viewAllDepartments();
             break;
 
         case 'Add Department':
@@ -45,17 +51,20 @@ async function promptUser() {
 
         case 'Quit':
             console.log(`\x1b[33mGoodbye!\x1b[0m`);
+            shouldExit = true;
             break;
 
         default:
             console.log('You must pick an option.');
     }
     // console log used for debugging purposes
-    console.log(`The result is: ${result}`);
+    // console.log(`The result is: ${result}`);
 
     if (shouldExit) {
-        // await database.disconnect(); will be used to disconnect from the database
-        process.exit(0);
+        // close the connection to the database
+        await db.end();
+        // close the application
+        await process.exit(0);
     } else {
         // used to recursively call the promptUser function
         promptUser();
