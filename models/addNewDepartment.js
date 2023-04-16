@@ -9,11 +9,11 @@ async function addNewDepartment() {
             message: 'What department would you like to add?',
         }
     ])
-    db.query('INSERT INTO department (name) VALUES (?);', [answer.addDepartment], (err, res) => {
+    db.query(`INSERT INTO department (name) VALUES ("${answer.addDepartment}");`, (err, res) => {
         if (err) {
             console.error(err);
         } else {
-            return `${answer} added`;
+            return `${answer.addDepartment} added`;
 
         }
     })

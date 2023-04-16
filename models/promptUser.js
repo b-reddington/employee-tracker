@@ -2,12 +2,14 @@
 const inquirer = require('inquirer');
 
 // Exported Models
-const viewAllDepartments = require('./viewAllDepartments');
-const addNewDepartment = require('./addNewDepartment');
-const viewAllRoles = require('./viewAllRoles');
-const addNewRole = require('./addNewRole');
+const addEmployee = require('./addEmployee');
 const viewAllEmployees = require('./viewAllEmployees');
 const updateEmployee = require('./updateEmployee');
+const addNewRole = require('./addNewRole');
+const viewAllRoles = require('./viewAllRoles');
+const addNewDepartment = require('./addNewDepartment');
+const viewAllDepartments = require('./viewAllDepartments');
+
 const db = require('../config/connection');
 
 async function promptUser() {
@@ -16,8 +18,15 @@ async function promptUser() {
             type: 'list',
             name: 'actions',
             message: 'What would you like to do?',
-            choices: ['View All Employees', 'Update Employee Role', 'View All Roles', 'Add Role',
-                'View All Departments', 'Add Department', 'Quit'],
+            choices: [
+                'Add an Employee',
+                'View All Employees',
+                'Add Role',
+                'Update Employee Role',
+                'View All Roles',
+                'Add Department',
+                'View All Departments',
+                'Quit'],
         },
     ])
     // This will be used to exit the application
@@ -25,8 +34,17 @@ async function promptUser() {
 
     let result;
     switch (answers.actions) {
+
+        case 'Add an Employee':
+            result = await addEmployee();
+            break;
+
         case 'View All Employees':
             result = await viewAllEmployees();
+            break;
+
+        case 'Add Role':
+            result = await addNewRole();
             break;
 
         case 'Update Employee Role':
@@ -37,16 +55,12 @@ async function promptUser() {
             result = await viewAllRoles();
             break;
 
-        case 'Add Role':
-            result = await addNewRole();
+        case 'Add Department':
+            result = await addNewDepartment();
             break;
 
         case 'View All Departments':
             result = await viewAllDepartments();
-            break;
-
-        case 'Add Department':
-            result = await addNewDepartment();
             break;
 
         case 'Quit':
