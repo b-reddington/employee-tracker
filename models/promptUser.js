@@ -1,7 +1,7 @@
 // Used for creating prompts
 const inquirer = require('inquirer');
 
-// Exported Models
+// imported Models
 const addEmployee = require('./addEmployee');
 const viewAllEmployees = require('./viewAllEmployees');
 const updateEmployee = require('./updateEmployee');
@@ -10,6 +10,7 @@ const viewAllRoles = require('./viewAllRoles');
 const addNewDepartment = require('./addNewDepartment');
 const viewAllDepartments = require('./viewAllDepartments');
 
+// Used to end the service
 const db = require('../config/connection');
 
 async function promptUser() {

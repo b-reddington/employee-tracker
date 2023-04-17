@@ -38,15 +38,15 @@ async function addEmployee() {
                 type: 'list',
                 name: 'manager',
                 message: 'Who is their manager?',
-                choices: managers
+                choices: ['None', ...managers]
             },
         ]);
         const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-        VALUES("
-        ${answer.firstName}",
+        VALUES(
+        "${answer.firstName}",
         "${answer.lastName}",
         "${answer.departments}",
-        "${answer.manager}");`
+        ${answer.manager === 'None' ? 'NULL' : answer.manager});`
         await db.promise().query(query);
         console.log(`${answer.firstName} ${answer.lastName} added`);
         return;
