@@ -1,7 +1,7 @@
 const db = require('../config/connection');
 const inquirer = require('inquirer');
 
-async function addNewDepartment() {
+async function newDepartment() {
     const answer = await inquirer.prompt([
         {
             type: 'input',
@@ -19,4 +19,4 @@ async function addNewDepartment() {
     })
 }
 
-module.exports = addNewDepartment;
+module.exports = newDepartment;

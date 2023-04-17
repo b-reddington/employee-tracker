@@ -1,7 +1,7 @@
 const cTable = require('console.table');
 const db = require('../config/connection');
 
-async function viewAllDepartments() {
+async function viewDepartments() {
     db.query(`SELECT * FROM department`, (err, rows) => {
         if (err) {
             console.log(err);
@@ -12,4 +12,4 @@ async function viewAllDepartments() {
     });
 }
 
-module.exports = viewAllDepartments;
+module.exports = viewDepartments;

@@ -1,7 +1,7 @@
 const cTable = require('console.table');
 const db = require('../config/connection');
 
-async function viewAllEmployees() {
+async function viewEmployees() {
     // Name, Salary, Department to add role to
     const query = `
 SELECT 
@@ -26,4 +26,4 @@ LEFT JOIN employee m ON e.manager_id = m.id;`;
     });
 }
 
-module.exports = viewAllEmployees;
+module.exports = viewEmployees;

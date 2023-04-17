@@ -3,12 +3,12 @@ const inquirer = require('inquirer');
 
 // imported Models
 const addEmployee = require('./addEmployee');
-const viewAllEmployees = require('./viewAllEmployees');
+const viewEmployees = require('./viewEmployees');
 const updateEmployee = require('./updateEmployee');
 const addNewRole = require('./addNewRole');
-const viewAllRoles = require('./viewAllRoles');
-const addNewDepartment = require('./addNewDepartment');
-const viewAllDepartments = require('./viewAllDepartments');
+const viewRoles = require('./viewRoles');
+const newDepartment = require('./newDepartment');
+const viewDepartments = require('./viewDepartments');
 
 // Used to end the service
 const db = require('../config/connection');
@@ -41,7 +41,7 @@ async function promptUser() {
             break;
 
         case 'View All Employees':
-            result = await viewAllEmployees();
+            result = await viewEmployees();
             break;
 
         case 'Add Role':
@@ -53,15 +53,15 @@ async function promptUser() {
             break;
 
         case 'View All Roles':
-            result = await viewAllRoles();
+            result = await viewRoles();
             break;
 
         case 'Add Department':
-            result = await addNewDepartment();
+            result = await newDepartment();
             break;
 
         case 'View All Departments':
-            result = await viewAllDepartments();
+            result = await viewDepartments();
             break;
 
         case 'Quit':

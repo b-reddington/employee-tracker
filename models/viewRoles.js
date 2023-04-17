@@ -1,7 +1,7 @@
 const cTable = require('console.table');
 const db = require('../config/connection');
 
-async function viewAllRoles() {
+async function viewRoles() {
     // Name, Salary, Department to add role to
     db.query(`SELECT * FROM role`, (err, rows) => {
         if (err) {
@@ -13,4 +13,4 @@ async function viewAllRoles() {
     });
 }
 
-module.exports = viewAllRoles;
+module.exports = viewRoles;
